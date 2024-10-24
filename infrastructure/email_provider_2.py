@@ -26,5 +26,7 @@ class EmailProvider2:
             print(response.status_code)
             print(response.body)
             print(response.headers)
+            return response
         except Exception as e:
             print(e.message)
+            return e
