@@ -13,49 +13,11 @@ Foram sugeridos 4 serviços e os escolhidos foram o Amazon SES e o Twilio Sendgr
 
 Para criar o projeto conforme foi solicitado, foi utilizado a linguagem Python com o uso de um ambiente venv com as bibliotecas abaixo que foram necessárias para o funcionamento adequado:
 
-* annotated-types    0.7.0
-* anyio              4.6.2.post1
 * boto3              1.35.46
-* botocore           1.35.46
-* certifi            2024.8.30
-* cffi               1.17.1
-* charset-normalizer 3.4.0
-* click              8.1.7
-* colorama           0.4.6
-* cryptography       43.0.3
 * fastapi            0.115.2
-* h11                0.14.0
-* idna               3.10
-* iniconfig          2.0.0
-* Jinja2             3.1.4
-* jmespath           1.0.1
-* MarkupSafe         3.0.2
-* mock               5.1.0
-* moto               5.0.18
-* packaging          24.1
-* pip                24.2
-* pluggy             1.5.0
-* pycparser          2.22
 * pydantic           2.9.2
-* pydantic_core      2.23.4
 * pytest             8.3.3
-* python-dateutil    2.9.0.post0
-* python-dotenv      1.0.1
-* python-http-client 3.3.7
-* PyYAML             6.0.2
-* requests           2.32.3
-* responses          0.25.3
-* s3transfer         0.10.3
-* sendgrid           6.11.0
-* six                1.16.0
-* sniffio            1.3.1
-* starkbank-ecdsa    2.2.0
-* starlette          0.40.0
-* typing_extensions  4.12.2
-* urllib3            2.2.3
 * uvicorn            0.32.0
-* Werkzeug           3.0.4
-* xmltodict          0.14.2
 
 Como mencionado, também foram utilizados dois provedores de e-mails: Amazon SES e Twilio SendGrid.
 
@@ -63,17 +25,11 @@ Como mencionado, também foram utilizados dois provedores de e-mails: Amazon SES
 
 No desenvolvimento do projeto, existiram alguns desafios. Eles foram obstáculos que tiveram que ser contornados para o funcionamento correto de acordo com o que foi solicitado. 
 
-Durante o processo de criação do primeiro serviço de provedor, Amazon SES, um dos desafios foi a decisão entre seguir com o SMTP ou com o AWS SDK(BOTO3 para Python), pois ambos servem para o envio de e-mails, porém o AWS SDK tem melhor controle de erros e templates e possui integração com o SES.
-
-Dessa forma, pensando que o serviço estaria sendo desenvolvido para uma empresa de grande porte, foi utilizado o desenvolvimento com a AWS SDK. Isso exigiu mais desenvolvimento em python para criar toda a conexão com os sistemas da Amazon.
+Durante o processo de criação do primeiro serviço de provedor, Amazon SES, um dos desafios foi a decisão entre seguir com a biblioteca SMTPlib ou com a AWS SDK(utilizando a biblioteca BOTO3 para Python), pois ambos servem para o disparo de e-mails, porém o AWS SDK tem melhor controle de erros e templates e possui integração com o SES.
 
 Outro desafio foi a escolha da arquitetura e a escolhida foi a Clean (Clean architecture) proposta por Robert C. Martin (Uncle Bob), no qual temos uma arquitetura em que os módulos ou entidades (entities) não são afetados por problemas ou erros nas APIs e/ou servidores de e-mails, por exemplo. 
 
 Isso foi pensando tanto para a característica sugerida pelos desenvolvedores do processo seletivo, pois pediram uma arquitetura baseada em cliente/serviços, como também para facilitar a implementação do segundo servidor de e-mail que tem a função de disparo quando o primeiro falhar.
-
-
-
-
 
 # Documentação da API
 
