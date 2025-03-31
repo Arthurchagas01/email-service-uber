@@ -1,64 +1,60 @@
 
 # email-service-uber
 
-O projeto consiste na resolução de um processo seletivo do Uber - Back-end track - no qual era solicitado que se criasse um dos quatro projetos e o escolhido foi o Email Service. 
+This project was developed as part of a technical challenge for Uber - Back-end track. The task was to implement one of four proposed services, and the chosen one was the Email Service.
 
-# O que foi solicitado na descrição do processo
+# Challenge Requirements
 
-Foi solicitado pelos organizadores do processo que no projeto Email Service fosse cirado um serviço que aceitasse algumas informações necessárias e enviasse e-mails. O serviço deveria prover uma abstração entre dois servidores de e-mails caso um dos servidores tivesse algum erro, de forma que não aja problemas para os consumidores. 
+The objective was to create an email service capable of receiving necessary information and sending emails. Additionally, the system had to abstract two email providers to ensure reliability—automatically switching to a secondary provider if the primary one failed.
 
-Foram sugeridos 4 serviços e os escolhidos foram o Amazon SES e o Twilio Sendgrid, devido a grande utilização do Amazon SES no mercado e também pela praticidade vista no Sendgrid para disparo de e-mails. 
+The selected email providers were Amazon SES and Twilio SendGrid, chosen for their industry adoption and ease of use.
 
-# Tecnologias e bibliotecas utilizadas
+# Technologies and Libraries Used
 
-Para criar o projeto conforme foi solicitado, foi utilizado a linguagem Python com o uso de um ambiente venv com as bibliotecas abaixo que foram necessárias para o funcionamento adequado:
+The project was built using Python within a venv environment, utilizing the following libraries:
 
-* boto3              1.35.46
-* fastapi            0.115.2
-* pydantic           2.9.2
-* pytest             8.3.3
-* uvicorn            0.32.0
+* boto3 1.35.46
+* fastapi 0.115.2
+* pydantic 2.9.2
+* pytest 8.3.3
+* uvicorn 0.32.0
 
-Como mencionado, também foram utilizados dois provedores de e-mails: Amazon SES e Twilio SendGrid.
+Additionally, Amazon SES and Twilio SendGrid were integrated as the email providers.
 
-# Desafios
+# Challenges Faced
 
-No desenvolvimento do projeto, existiram alguns desafios. Eles foram obstáculos que tiveram que ser contornados para o funcionamento correto de acordo com o que foi solicitado. 
+## Email Provider Selection
 
-Durante o processo de criação do primeiro serviço de provedor, Amazon SES, um dos desafios foi a decisão entre seguir com a biblioteca SMTPlib ou com a AWS SDK(utilizando a biblioteca BOTO3 para Python), pois ambos servem para o disparo de e-mails, porém o AWS SDK tem melhor controle de erros e templates e possui integração com o SES.
+One challenge was choosing between using SMTPlib or AWS SDK (Boto3) for Amazon SES. The AWS SDK was preferred due to its enhanced error handling, templating support, and seamless SES integration.
 
-Outro desafio foi a escolha da arquitetura e a escolhida foi a Clean (Clean architecture) proposta por Robert C. Martin (Uncle Bob), no qual temos uma arquitetura em que os módulos ou entidades (entities) não são afetados por problemas ou erros nas APIs e/ou servidores de e-mails, por exemplo. 
+## Architecture
 
-Isso foi pensando tanto para a característica sugerida pelos desenvolvedores do processo seletivo, pois pediram uma arquitetura baseada em cliente/serviços, como também para facilitar a implementação do segundo servidor de e-mail que tem a função de disparo quando o primeiro falhar.
+The project follows the Clean Architecture approach, as proposed by Robert C. Martin (Uncle Bob). This design ensures that core business logic remains independent of APIs or email providers, aligning with the client-service architecture suggested in the challenge. This also simplified the implementation of a fallback email provider.
 
 # Documentação da API
 
-## Api relativa ao e-mail enviados
-
-#### Envia e-mail:
-### Função: send_mail()
-
+## Send Email
 ```http
   POST /users/
 ```
 
-| Parâmetro   | Tipo       | Descrição                                   |
+| Parameter   | Type       | Description                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `to_email`      | `string` | **Obrigatório**. E-mail destinatário|
-| `subject`      | `string` | **Obrigatório**. O assunto do e-mail |
-| `body`      | `string` | **Obrigatório**. O corpo do e-mail |
+| `to_email`      | `string` | **Required.** Recipient email |
+| `subject`      | `string` | **Required.** Email subject |
+| `body`      | `string` | **Required.** Email content |
 
 
-# Rodando os testes
+# Running Tests
 
-Para rodar os testes, rode o seguinte comando
+To run tests, execute:
 
 ```bash
   pytest
 ```
 
 
-# Referência
+# References
 
  - [Uber - coding-challenge-tools](https://github.com/uber-archive/coding-challenge-tools)
 
